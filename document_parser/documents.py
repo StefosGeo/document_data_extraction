@@ -43,14 +43,22 @@ class Document(abc.ABC):
 
 class PDFDocument(Document):
 
-    def read(self):
-        with open(self._document, "rb") as file:
-            reader = PdfReader(file)
-            raw_text = ""
-            for page in reader.pages:
-                text = page.extract_text()
-                if text:
-                    raw_text += text
-        self._raw_text = raw_text
-        return self
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._raw_text = ""
 
+    def read(self):
+        texts = []
+        try:
+            with open(self._document, "rb") as file:
+                reader = PdfReader(file)
+                for page in reader.pages:
+                    text = page.extract_text()
+                    if text:
+                        texts.append(text)
+        except Exception as e:
+            # Handle or log the error as needed
+            print(f"Error reading PDF: {e}")
+
+        self._raw_text = "".join(texts)
+        return self
