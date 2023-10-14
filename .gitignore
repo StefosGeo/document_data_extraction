@@ -1,4 +1,4 @@
 .env
 .idea
-*.pyc
-*__pychache__*
+#*.pyc
+#*__pychache__*
