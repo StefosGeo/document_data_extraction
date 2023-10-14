@@ -30,8 +30,8 @@ def parse_documents():
         for document_path in documents_paths:
             try:
                 document = PDFDocument(os.path.join(DOCUMENT_FOLDER, document_path))
-                parser = DataExtractor(document)
-                results = parser.qa()
+                extractor = DataExtractor(document)
+                results = extractor.qa()
 
                 if first_run:
                     csv_writer = csv.DictWriter(csvfile, fieldnames=results.keys())
@@ -42,6 +42,7 @@ def parse_documents():
             except Exception as e:
                 logging.error(f"Error processing {document_path}: {e}")
 
+    logging.info(f"Total cost ($): {extractor.total_cost}")
     logging.info(f"Results have been saved to {CSV_FILENAME}")
 
 
