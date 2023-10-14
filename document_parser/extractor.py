@@ -51,8 +51,8 @@ class DataExtractor:
         self._doc_search = DocumentSearch(document, self._embeddings)
         self._qa = OpenAIQA()
         self._query_instruction = " Give the answer in json format. example {out: 45}"
-        self._total_tokens = 0
-        self._total_cost = 0
+        self.total_tokens = 0
+        self.total_cost = 0
 
     def qa(self):
         results = defaultdict()
@@ -64,14 +64,14 @@ class DataExtractor:
                 response = self._qa.ask(docs, prompt)
                 results[question.name] = json.loads(response)["out"]
                 self._print_logs(cb, question, results)
-                self._total_tokens += cb.total_tokens
-                self._total_cost += cb.total_cost
+                self.total_tokens += cb.total_tokens
+                self.total_cost += cb.total_cost
         return results
 
     @staticmethod
     def _print_logs(cb, question, results):
-        logger.info(f"[Parser] Query: {question.name} | Response: {results[question.name]}")
-        logger.info(f"[Parser] Total Tokens: {cb.total_tokens}")
-        logger.info(f"[Parser] Prompt Tokens: {cb.prompt_tokens}")
-        logger.info(f"[Parser] Completion Tokens: {cb.completion_tokens}")
-        logger.info(f"[Parser] Total Cost (USD): ${cb.total_cost}")
+        logger.info(f"[Extractor] Query: {question.name} | Response: {results[question.name]}")
+        logger.info(f"[Extractor]   Total Tokens: {cb.total_tokens}")
+        logger.info(f"[Extractor]   Prompt Tokens: {cb.prompt_tokens}")
+        logger.info(f"[Extractor]   Completion Tokens: {cb.completion_tokens}")
+        logger.info(f"[Extractor]   Total Cost (USD): ${cb.total_cost}")
