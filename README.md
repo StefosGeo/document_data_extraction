@@ -40,7 +40,7 @@ The Document scraper is skipped for now, since it is not the main focus of the p
    
 4. Run the Docker container:
    ```bash
-    docker run -it document_data_extraction
+    docker run -v $(pwd)/output:/llm_data_parser/output -it document_data_extraction
     ```
    
 
@@ -52,7 +52,7 @@ The Document scraper is skipped for now, since it is not the main focus of the p
 
 
 ## Future Work
-- [ ] Add a sanitization step to the extracted data.
+- [ ] Add a sanitization and validation step to the extracted data.
 - [ ] Handle more file formats.
 - [ ] Store extracted data in a database.
 - [ ] Add a web interface for the tool.
