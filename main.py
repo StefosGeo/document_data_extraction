@@ -1,8 +1,15 @@
-import csv
 import os
+import csv
+import logging
 
 from document_parser.documents import PDFDocument
 from document_parser.extractor import DataExtractor
+
+# Configuration
+DOCUMENT_FOLDER = "data/"
+CSV_FILENAME = "output/results.csv"
+
+logging.basicConfig(level=logging.INFO)
 
 
 def parse_documents():
@@ -11,31 +18,31 @@ def parse_documents():
     Store the results in a csv file.
     """
 
-    document_folder = "data/"
-    documents_paths = os.listdir(document_folder)
+    if not os.path.exists(DOCUMENT_FOLDER):
+        logging.error(f"Folder {DOCUMENT_FOLDER} does not exist.")
+        return
 
-    # Define the name of the CSV file to save the results
-    csv_filename = "output/results.csv"
+    documents_paths = [file for file in os.listdir(DOCUMENT_FOLDER) if file.endswith('.pdf')]
 
-    # Open CSV file for writing
-    with open(csv_filename, 'w', newline='') as csvfile:
-        # We'll write the header only once, based on the keys of the first document parsed
+    with open(CSV_FILENAME, 'w', newline='') as csvfile:
         first_run = True
 
         for document_path in documents_paths:
-            document = PDFDocument(document_folder + document_path)
-            parser = DataExtractor(document)
-            results = parser.qa()
+            try:
+                document = PDFDocument(os.path.join(DOCUMENT_FOLDER, document_path))
+                parser = DataExtractor(document)
+                results = parser.qa()
 
-            # Write header if it's the first document parsed
-            if first_run:
-                csv_writer = csv.DictWriter(csvfile, fieldnames=results.keys())
-                csv_writer.writeheader()
-                first_run = False
+                if first_run:
+                    csv_writer = csv.DictWriter(csvfile, fieldnames=results.keys())
+                    csv_writer.writeheader()
+                    first_run = False
 
-            csv_writer.writerow(results)
+                csv_writer.writerow(results)
+            except Exception as e:
+                logging.error(f"Error processing {document_path}: {e}")
 
-    print(f"Results have been saved to {csv_filename}")
+    logging.info(f"Results have been saved to {CSV_FILENAME}")
 
 
 if __name__ == "__main__":
