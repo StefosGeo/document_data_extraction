@@ -58,7 +58,7 @@ class PDFDocument(Document):
                         texts.append(text)
         except Exception as e:
             # Handle or log the error as needed
-            print(f"Error reading PDF: {e}")
+            raise ValueError(f"Error reading PDF: {e}")
 
         self._raw_text = "".join(texts)
         return self

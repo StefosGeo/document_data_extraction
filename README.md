@@ -9,6 +9,7 @@ The Document scraper is skipped for now, since it is not the main focus of the p
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Tests](#tests)
 - [Future Work](#future-work)
 - [License](#license)
 
@@ -49,6 +50,14 @@ The Document scraper is skipped for now, since it is not the main focus of the p
 * Add the PDF files you want to extract data from in the `data` folder.
 * Run using the above instructions.
 * The extracted data will be saved in the `output` folder in CSV format.
+
+
+## Tests
+
+Run the tests using the following command:
+```bash
+python -m unittest discover -s tests
+```
 
 
 ## Future Work
