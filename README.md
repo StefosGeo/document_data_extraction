@@ -1,6 +1,7 @@
 # PDF Data Extractor
 
 This tool automatically parses PDF files and  leverages OpenAI and Langchain to extract structured data from them.
+The Document scraper is skipped for now, since it is not the main focus of the project.
 
 ## Table of Contents
 
@@ -51,7 +52,12 @@ This tool automatically parses PDF files and  leverages OpenAI and Langchain to 
 
 
 ## Future Work
-* TBD
+- [ ] Add a sanitization step to the extracted data.
+- [ ] Handle more file formats.
+- [ ] Store extracted data in a database.
+- [ ] Add a web interface for the tool.
+- [ ] Better exception handling.
+- [ ] Add tests.
 
 ## License
 
