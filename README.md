@@ -1,6 +1,6 @@
-# PDF Scraper and Data Extractor
+# PDF Data Extractor
 
-This tool automatically scrapes PDF files from a specified website and then leverages OpenAPI and Lanchain to extract structured data from them.
+This tool automatically parses PDF files and  leverages OpenAI and Langchain to extract structured data from them.
 
 ## Table of Contents
 
@@ -8,22 +8,51 @@ This tool automatically scrapes PDF files from a specified website and then leve
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
+- [Future Work](#future-work)
 - [License](#license)
-- [Acknowledgements](#acknowledgements)
+
 
 ## Features
 
-- **PDF Scraping**: Quickly and efficiently download PDF files from a target website.
-- **Data Extraction**: Utilize the power of OpenAPI and Lanchain to process and extract structured data from the scraped PDFs.
+- **Data Extraction**: Utilize the power of OpenAPI and Langchain to process and extract structured data from the scraped PDFs.
 
 ## Prerequisites
 
 - [Python](https://www.python.org/downloads/)
 - Additional libraries and dependencies (refer to the `requirements.txt`).
+- Docker
 
 ## Installation
 
 1. Clone this repository:
    ```bash
-   git clone [YOUR_REPO_LINK]
+   git clone git@github.com:StefosGeo/document_data_extraction.git
+   ```
+   
+2. Rename the `.env.example` file to `.env` and fill in the required fields.
+
+
+3. Build the Docker image:
+   ```bash
+    docker build -t document_data_extraction .
+    ```
+   
+4. Run the Docker container:
+   ```bash
+    docker run -it document_data_extraction
+    ```
+   
+
+## Usage
+
+* Add the PDF files you want to extract data from in the `data` folder.
+* Run using the above instructions.
+* The extracted data will be saved in the `output` folder in CSV format.
+
+
+## Future Work
+* TBD
+
+## License
+
+#### MIT License
