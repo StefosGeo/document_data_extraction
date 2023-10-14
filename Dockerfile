@@ -1,5 +1,6 @@
 # Use an official Python runtime as the base image
 FROM python:3.9-slim
+RUN pip install --upgrade pip==23.2.1
 
 # Set the working directory in the container
 WORKDIR /llm_data_parser
